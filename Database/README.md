@@ -1,0 +1,1 @@
+### Solutions written in MySQL
