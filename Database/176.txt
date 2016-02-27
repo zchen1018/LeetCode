@@ -6,11 +6,3 @@ select MAX(Salary)
 from Employee
 where Salary < (select MAX(Salary) 
 from Employee);
-
-# ..Or
-select MAX(Salary) 
-from Employee Emp1
-where 1 = ( /* N-1 for finding the Nth highest salary */
-select COUNT(DISTINCT(Emp2.Salary))
-from Employee Emp2
-where Emp2.Salary > Emp1.Salary);
