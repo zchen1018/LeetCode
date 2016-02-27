@@ -1,0 +1,25 @@
+Nth Highest Salary
+https://leetcode.com/problems/nth-highest-salary/
+
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+      # Write your MySQL query statement below.
+      select MAX(Salary)
+      from Employee emp1
+      where (N-1) = (select count(distinct(Salary))
+                from Employee emp2
+                where emp2.Salary > emp1.Salary)
+  );
+END
+
+# ..Or
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+	select Salary from 
+	(select distinct Salary, (select count(distinct Salary) from Employee where Salary >= e.Salary) Rank
+	from Employee e) e1
+	where e1.Rank=n
+  );
+END
