@@ -1,0 +1,17 @@
+Duplicate Emails
+https://leetcode.com/problems/duplicate-emails/
+
+# Write your MySQL query statement below
+select Email 
+from
+(select Email, count(*) as cnt
+from Person
+group by Email
+) a
+where cnt > 1;
+
+# ..Or
+select Email 
+from Person
+group by Email
+having count(*) > 1;
