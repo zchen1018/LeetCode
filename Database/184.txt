@@ -1,0 +1,18 @@
+Department Highest Salary
+https://leetcode.com/problems/department-highest-salary/
+
+# Write your MySQL query statement below
+# Using MAX(Salary) group by id would only yield one record for the group, which neglects the case when there are multiple maximum values in one group
+
+select d.Name as Department, b.Name as Employee, b.Salary
+from (select emp.Name, emp.Salary, emp.DepartmentId
+from Employee emp 
+left join (select MAX(Salary) as max_Salary, DepartmentId
+from Employee
+group by DepartmentId
+) a 
+on emp.DepartmentId = a.DepartmentId
+where emp.Salary = a.max_Salary
+) b left join Department d
+on b.DepartmentId = d.Id
+where d.Name is not NULL;

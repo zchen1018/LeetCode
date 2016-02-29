@@ -1,0 +1,18 @@
+Department Top Three Salaries
+https://leetcode.com/problems/department-top-three-salaries/
+
+# Write your MySQL query statement below
+# Calculate the Salary rank within each department and filter on the rank
+
+select dpt.Name as Department, a.Name as Employee, a.Salary
+from
+(select emp1.Name, emp1.Salary, emp1.DepartmentId
+from Employee emp1
+where (select count(distinct(Salary)) as rank
+from Employee
+where DepartmentId = emp1.DepartmentId
+and Salary >= emp1.Salary
+) <= 3
+) a left join Department dpt
+on a.DepartmentId = dpt.Id
+where dpt.Name is not NULL;
