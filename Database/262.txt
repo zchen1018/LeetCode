@@ -1,0 +1,14 @@
+Trips and Users
+https://leetcode.com/problems/trips-and-users/
+
+# Write your MySQL query statement below
+select Request_at as Day, ROUND(sum(CASE Status when "completed" then 0 else 1 END)/count(*), 2) as Cancellation_Rate
+from Trips
+where Client_Id in (select Users_id # Unbanned clients id
+from Users
+where Banned = 'No'
+and Role = 'client'
+)
+group by Request_at
+having Request_at >= '2013-10-01'
+and Request_at <= '2013-10-03';
