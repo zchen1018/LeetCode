@@ -16,3 +16,18 @@ and Salary >= emp1.Salary
 ) a left join Department dpt
 on a.DepartmentId = dpt.Id
 where dpt.Name is not NULL;
+
+# 2nd Version
+SELECT dpt.Name as Department, a.Employee, a.Salary
+FROM
+(SELECT DepartmentId, Name as Employee, Salary, (Select count(distinct(Salary))# find the top 3 in department and department id
+from Employee emp1
+where DepartmentId = emp2.DepartmentId
+and Salary >= emp2.Salary
+) as Rank
+from Employee emp2
+) a
+LEFT JOIN Department dpt
+ON a.DepartmentId = dpt.Id
+WHERE dpt.Id IS NOT NULL
+AND a.Rank <= 3
