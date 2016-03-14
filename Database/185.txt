@@ -21,7 +21,7 @@ where dpt.Name is not NULL;
 SELECT dpt.Name as Department, a.Employee, a.Salary
 FROM
 (SELECT DepartmentId, Name as Employee, Salary, (Select count(distinct(Salary))# find the top 3 in department and department id
-from Employee emp1
+from Employee
 where DepartmentId = emp2.DepartmentId
 and Salary >= emp2.Salary
 ) as Rank
