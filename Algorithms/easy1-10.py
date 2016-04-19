@@ -34,6 +34,7 @@ class Solution(object):
         for i in range(len(num_str)):
             s = s + int(num_str[i])
         return s
+# Follow-up: without any loop       
 # By https://en.wikipedia.org/wiki/Digital_root
 class Solution(object):
     def addDigits(self, num):
@@ -47,3 +48,69 @@ class Solution(object):
             digit_root = int(num - 9*math.floor((num-1)/9))
             
         return digit_root
+
+
+
+# 283. Move Zeroes
+# Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+# For example, given nums = [0, 1, 0, 3, 12], after calling your function, nums should be [1, 3, 12, 0, 0].
+# Note:
+# You must do this in-place without making a copy of the array.
+# Minimize the total number of operations.
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        non_zero = [x for x in nums if x != 0]
+        nums[:len(non_zero)] = non_zero
+        nums[len(non_zero):] = [0] * (len(nums) - len(non_zero))
+
+
+
+# 242. Valid Anagram
+# Given two strings s and t, write a function to determine if t is an anagram of s.
+# For example,
+# s = "anagram", t = "nagaram", return true.
+# s = "rat", t = "car", return false.
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        if len(s) != len(t):
+            return False
+            
+        # create a dictionary for each string and compare them    
+        s_dic = {}
+        for chr in s:
+            if chr in s_dic.keys():
+                s_dic[chr] += 1
+            else:
+                s_dic[chr] = 1
+        
+        t_dic = {}
+        for chr in t:
+            if chr in t_dic.keys():
+                t_dic[chr] += 1
+            else:
+                t_dic[chr] = 1
+            
+        return s_dic == t_dic
+
+
+
+# 168. Excel Sheet Column Title
+# Given a positive integer, return its corresponding column title as appear in an Excel sheet.
+# For example:
+#     1 -> A
+#     2 -> B
+#     3 -> C
+#     ...
+#     26 -> Z
+#     27 -> AA
+#     28 -> AB
+
