@@ -149,3 +149,67 @@ class Solution(object):
             num += temp * 26**i
         return num
 
+
+
+# 217. Contains Duplicate
+# Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+class Solution(object):
+    def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        nums_set = set(nums)
+        return len(nums_set) != len(nums)
+
+
+
+# 169. Majority Element
+# Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+# You may assume that the array is non-empty and the majority element always exist in the array.
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        for x in set(nums):
+            if nums.count(x) > len(nums)/2:
+                return x
+
+
+
+# 13. Roman to Integer
+# Given a roman numeral, convert it to an integer.
+# Input is guaranteed to be within the range from 1 to 3999.
+class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        roman_dict = {'I': 1, 'V':5, 'X':10, 'L':50, 'C': 100, 'D':500, 'M':1000}
+        sum = 0
+        prev = 1001
+        for i in range(len(s)):
+            curr = roman_dict[s[i]]
+            sum += curr
+            if prev < curr:
+                sum -= 2*prev
+            prev = curr
+        
+        return sum
+
+
+
+# 191. Number of 1 Bits
+# Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as the Hamming weight).
+# For example, the 32-bit integer ’11' has binary representation 00000000000000000000000000001011, so the function should return 3.
+class Solution(object):
+    def hammingWeight(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        return bin(n).count('1')
+        #return "{0:b}".format(n).count('1')
