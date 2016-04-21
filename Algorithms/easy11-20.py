@@ -66,3 +66,23 @@ class Solution(object):
             if res_temp == res:
                 return False
         return True
+
+
+
+# 326. Power of Three
+# Given an integer, write a function to determine if it is a power of three.
+class Solution(object):
+    def isPowerOfThree(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        # loop version
+        if n <= 0:
+            return False
+        while n % 3 == 0:
+            n = n/3
+        return n == 1
+
+        # without loop
+        # return n > 0 and 3**19 % n == 0
