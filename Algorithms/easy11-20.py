@@ -40,3 +40,29 @@ class Solution(object):
         for i in range(n-2):
             a, b = b, a+b
         return b
+
+
+
+# 263. Ugly Number
+# Write a program to check whether a given number is an ugly number.
+# Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. For example, 6, 8 are ugly while 14 is not ugly since it includes another prime factor 7.
+# Note that 1 is typically treated as an ugly number.
+class Solution(object):
+    def isUgly(self, num):
+        """
+        :type num: int
+        :rtype: bool
+        """
+        if num <= 0:
+            return False
+        
+        ugly_prime = [2, 3, 5]
+        res = num
+        while res > 1:
+            res_temp = res
+            for x in ugly_prime:
+                if res % x == 0:
+                    res = res / x
+            if res_temp == res:
+                return False
+        return True
