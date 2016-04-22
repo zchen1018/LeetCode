@@ -151,3 +151,70 @@ class Solution(object):
             max_profit = max(profit, max_profit)
             
         return max_profit
+
+
+
+# 21. Merge Two Sorted Lists
+# Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        cur_l1 = l1
+        cur_l2 = l2
+        
+        head = ListNode(None)
+        output = head
+        
+        while cur_l1 and cur_l2:
+            if cur_l1.val < cur_l2.val:
+                output.next = cur_l1
+                cur_l1 = cur_l1.next
+            else:
+                output.next = cur_l2
+                cur_l2 = cur_l2.next
+            output = output.next
+        else:
+            if cur_l1 == None:
+                output.next = cur_l2
+            else:
+                output.next = cur_l1
+        
+        return head.next
+
+
+
+# 24. Swap Nodes in Pairs
+# Given a linked list, swap every two adjacent nodes and return its head.
+# For example,
+# Given 1->2->3->4, you should return the list as 2->1->4->3.
+# Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution(object):
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        dummyNode = p0 = ListNode(0)
+        dummyNode.next = head
+        
+        # p0->p1->p2->p2.next ----> p0->p2->p1->p2.next
+        while p0.next and p0.next.next:
+          p1, p2 = p0.next, p0.next.next
+          p0.next, p1.next, p2.next = p2, p2.next, p1
+          p0 = p1
+
+        return dummyNode.next
