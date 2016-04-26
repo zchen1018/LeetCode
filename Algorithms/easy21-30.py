@@ -12,6 +12,33 @@ class Solution(object):
 
 
 
+# 345. Reverse Vowels of a String
+# Write a function that takes a string as input and reverse only the vowels of a string.
+# Example 1:
+# Given s = "hello", return "holle".
+# Example 2:
+# Given s = "leetcode", return "leotcede".
+class Solution(object):
+    def reverseVowels(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        vowels_s = []
+        vowels_pos = []
+        s_list = list(s)
+        for i, char in enumerate(s_list):
+            if char.lower() in ['a', 'e', 'i', 'o', 'u']:
+                vowels_pos.append(i)
+                vowels_s.append(char)
+                
+        for x in vowels_pos:
+            s_list[x] = vowels_s.pop()
+        
+        return ''.join(s_list)
+
+
+
 # 14. Longest Common Prefix
 # Write a function to find the longest common prefix string amongst an array of strings.
 class Solution(object):
