@@ -111,5 +111,8 @@ class Solution(object):
         # return num == 1
         
         return (num != 0 and num &(num-1) == 0 # make sure it's at least power of 2
-                and num & 1431655765 != 0) # get rid of power of 2        
+                and num & 1431655765 != 0) # get rid of power of 2
+
+
+        
             
